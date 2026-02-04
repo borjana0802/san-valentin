@@ -22,11 +22,11 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
+            max-width: 450px; /* Un poco más ancho para tu texto */
             width: 90%;
         }
 
-        h1 { color: #d63384; font-size: 1.8rem; }
+        h1 { color: #d63384; font-size: 1.6rem; line-height: 1.4; }
 
         .buttons {
             margin-top: 30px;
@@ -52,13 +52,12 @@
 
         #imagen {
             width: 100%;
-            height: 200px;
+            height: 250px; /* Un poco más alto */
             object-fit: contain;
             margin-bottom: 20px;
             border-radius: 10px;
         }
 
-        /* Reproductor oculto */
         #musica-container {
             position: absolute;
             width: 0;
@@ -71,12 +70,12 @@
 <body>
 
     <div class="container">
-        <img id="imagen" src="https://media.tenor.com/On79Z75v_78AAAAi/cute-flying.gif" alt="Gatito">
+        <img id="imagen" src="https://media.tenor.com/f1vS0al_i68AAAAj/mochi-peach.gif" alt="Gatitos">
         <h1 id="titulo">Quiele se mi san va lentin mi niña la mas uapa lel mundo? 🥺💞</h1>
         
         <div class="buttons">
-            <button id="btn-si">¡SÍ!</button>
-            <button id="btn-no">No</button>
+            <button id="btn-si">Chiii mi niñooo</button>
+            <button id="btn-no">No jolín</button>
         </div>
     </div>
 
@@ -85,7 +84,6 @@
     </div>
 
     <script>
-        // Cargar API de YouTube para control total
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -96,16 +94,14 @@
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
-                videoId: 'GnJ4znpPgr8', // Tu canción: La Diabla
+                videoId: 'GnJ4znpPgr8',
                 events: {
                     'onReady': onPlayerReady
                 }
             });
         }
 
-        function onPlayerReady(event) {
-            // Preparado para sonar al primer click
-        }
+        function onPlayerReady(event) {}
 
         const btnSi = document.getElementById('btn-si');
         const btnNo = document.getElementById('btn-no');
@@ -123,7 +119,6 @@
             "si le vuelve a da a que no yo ma para siempre..."
         ];
 
-        // Función para activar música al interactuar
         function iniciarMusica() {
             if (player && player.playVideo) {
                 player.playVideo();
@@ -131,7 +126,7 @@
         }
 
         btnNo.addEventListener('click', () => {
-            iniciarMusica(); // Suena al intentar decir que no
+            iniciarMusica();
             fontSizeSi += 0.8;
             paddingSi += 10;
             btnSi.style.fontSize = fontSizeSi + "rem";
@@ -139,15 +134,18 @@
             
             const randomMsg = mensajesNo[Math.floor(Math.random() * mensajesNo.length)];
             btnNo.innerText = randomMsg;
+
+            // GIF cuando dice que NO (Gatito llorando)
+            imagen.src = "https://media.tenor.com/0v8Vv6P55pYAAAAj/sad-cute.gif";
         });
 
         btnSi.addEventListener('click', () => {
-            iniciarMusica(); // Suena al decir que sí
+            iniciarMusica();
             titulo.innerHTML = " 💞BIEEEEEEEN TE AMO MI NIÑAAAAAAAA Y YO MA ALIOOOOOOOOOOOOO 💞 ";
-            // Nuevo GIF de celebración estable
-            imagen.src = "https://media.tenor.com/gU_Pb_769_8AAAAAi/tkthao219-bubududu.gif";
             
-            // Ocultar botones para limpiar la pantalla
+            // GIF FINAL DE CELEBRACIÓN (Gatitos celebrando)
+            imagen.src = "https://media.tenor.com/A6S9YcclI8AAAAAj/mochi-mochi-peach-cat-peach-cat.gif";
+            
             btnNo.style.display = 'none';
             btnSi.style.display = 'none';
         });
