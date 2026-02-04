@@ -13,7 +13,8 @@
             height: 100vh;
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #ffe6e6;
+            /* Se ha cambiado el color de fondo aquí debajo */
+            background-color: #dfa7e4; 
             text-align: center;
         }
 
@@ -134,16 +135,11 @@
             
             const randomMsg = mensajesNo[Math.floor(Math.random() * mensajesNo.length)];
             btnNo.innerText = randomMsg;
-            
-            // He quitado el cambio al gif triste para que se quede la foto de Cinnamoroll que querías
         });
 
         btnSi.addEventListener('click', () => {
             iniciarMusica();
             titulo.innerHTML = " 💞BIEEEEEEEN TE AMO MI NIÑAAAAAAAA Y YO MA ALIOOOOOOOOOOOOO 💞 ";
-            
-            // Si quieres que al final salga un GIF de celebración, puedes ponerlo aquí. 
-            // Si prefieres que se quede la misma foto, deja la línea de abajo borrada.
             imagen.src = "https://media.tenor.com/A6S9YcclI8AAAAAj/mochi-mochi-peach-cat-peach-cat.gif";
             
             btnNo.style.display = 'none';
