@@ -15,16 +15,18 @@
             font-family: 'Arial', sans-serif;
             background-color: #ffe6e6;
             text-align: center;
+            overflow: hidden;
         }
-
-        h1 { color: #d63384; font-size: 2.5rem; }
 
         .container {
-            padding: 20px;
+            padding: 30px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 90%;
         }
+
+        h1 { color: #d63384; font-size: 2rem; transition: all 0.3s; }
 
         .buttons {
             margin-top: 30px;
@@ -41,30 +43,29 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-weight: bold;
         }
 
-        #btn-si {
-            background-color: #28a745;
-            color: white;
-        }
-
-        #btn-no {
-            background-color: #dc3545;
-            color: white;
-        }
+        #btn-si { background-color: #28a745; color: white; }
+        #btn-no { background-color: #dc3545; color: white; }
 
         #imagen {
-            width: 200px;
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
             margin-bottom: 20px;
         }
+
+        /* Ocultar el reproductor de YouTube */
+        #musica { display: none; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img id="imagen" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycGZ4M25oZnR3eXh3eXh3eXh3eXh3eXh3eXh3eXh3eXh3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito tierno">
-        <h1 id="titulo">¿Quieres ser mi San Valentín este año? 🌹</h1>
+        <img id="imagen" src="https://media.tenor.com/On79Z75v_78AAAAi/cute-flying.gif" alt="Gatito tierno">
+        <h1 id="titulo">¿Quieres ser mi San Valentín? 🌹</h1>
         
         <div class="buttons">
             <button id="btn-si">¡SÍ!</button>
@@ -72,42 +73,58 @@
         </div>
     </div>
 
+    <iframe id="musica" src="https://www.youtube.com/embed/GnJ4znpPgr8?enablejsapi=1" allow="autoplay"></iframe>
+
     <script>
         const btnSi = document.getElementById('btn-si');
         const btnNo = document.getElementById('btn-no');
         const titulo = document.getElementById('titulo');
         const imagen = document.getElementById('imagen');
+        const musica = document.getElementById('musica');
 
         let fontSizeSi = 1.2;
         let paddingSi = 15;
+        let reproducirMusica = false;
 
         const mensajesNo = [
-            "¿Estás segura?",
-            "¿De verdad?",
-            "Piénsalo otra vez...",
-            "¡No me hagas esto!",
-            "Voy a llorar...",
-            "Me rompes el corazón 💔"
+            "¿Segura? 🥺",
+            "Piénsalo bien...",
+            "¡Será divertido!",
+            "Dime que síiii",
+            "¡No acepto un no! 😤",
+            "Mira el botón verde, es más bonito"
         ];
 
+        function playMusica() {
+            if (!reproducirMusica) {
+                // Comando para que el iframe de YouTube empiece a sonar
+                musica.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                reproducirMusica = true;
+            }
+        }
+
         btnNo.addEventListener('click', () => {
-            // Aumentar tamaño del botón SÍ
-            fontSizeSi += 0.5;
-            paddingSi += 10;
+            playMusica();
+            // Hacer el SÍ más grande
+            fontSizeSi += 0.8; 
+            paddingSi += 12;
             btnSi.style.fontSize = fontSizeSi + "rem";
             btnSi.style.padding = paddingSi + "px " + (paddingSi * 2) + "px";
 
-            // Cambiar texto del botón NO aleatoriamente
+            // Cambiar texto del botón No
             const randomMsg = mensajesNo[Math.floor(Math.random() * mensajesNo.length)];
             btnNo.innerText = randomMsg;
         });
 
         btnSi.addEventListener('click', () => {
+            playMusica();
             titulo.innerHTML = "¡SABÍA QUE DIRÍAS QUE SÍ! ❤️😍";
-            imagen.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW01eXF4M25oZnR3eXh3eXh3eXh3eXh3eXh3eXh3eXh3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aPAt99V4XQ9XW595/giphy.gif";
+            // Nuevo GIF que no falla
+            imagen.src = "https://media.tenor.com/gU_Pb_769_8AAAAAi/tkthao219-bubududu.gif";
+            
+            // Ocultar botones
             btnNo.style.display = 'none';
-            btnSi.style.fontSize = "1.5rem";
-            btnSi.style.padding = "15px 30px";
+            btnSi.style.display = 'none';
         });
     </script>
 </body>
