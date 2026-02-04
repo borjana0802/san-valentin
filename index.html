@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            text-align: center;
+        }
+
+        h1 { color: #d63384; font-size: 2.5rem; }
+
+        .container {
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btn-si {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #btn-no {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #imagen {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="imagen" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycGZ4M25oZnR3eXh3eXh3eXh3eXh3eXh3eXh3eXh3eXh3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito tierno">
+        <h1 id="titulo">¿Quieres ser mi San Valentín este año? 🌹</h1>
+        
+        <div class="buttons">
+            <button id="btn-si">¡SÍ!</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const titulo = document.getElementById('titulo');
+        const imagen = document.getElementById('imagen');
+
+        let fontSizeSi = 1.2;
+        let paddingSi = 15;
+
+        const mensajesNo = [
+            "¿Estás segura?",
+            "¿De verdad?",
+            "Piénsalo otra vez...",
+            "¡No me hagas esto!",
+            "Voy a llorar...",
+            "Me rompes el corazón 💔"
+        ];
+
+        btnNo.addEventListener('click', () => {
+            // Aumentar tamaño del botón SÍ
+            fontSizeSi += 0.5;
+            paddingSi += 10;
+            btnSi.style.fontSize = fontSizeSi + "rem";
+            btnSi.style.padding = paddingSi + "px " + (paddingSi * 2) + "px";
+
+            // Cambiar texto del botón NO aleatoriamente
+            const randomMsg = mensajesNo[Math.floor(Math.random() * mensajesNo.length)];
+            btnNo.innerText = randomMsg;
+        });
+
+        btnSi.addEventListener('click', () => {
+            titulo.innerHTML = "¡SABÍA QUE DIRÍAS QUE SÍ! ❤️😍";
+            imagen.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW01eXF4M25oZnR3eXh3eXh3eXh3eXh3eXh3eXh3eXh3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v4aPAt99V4XQ9XW595/giphy.gif";
+            btnNo.style.display = 'none';
+            btnSi.style.fontSize = "1.5rem";
+            btnSi.style.padding = "15px 30px";
+        });
+    </script>
+</body>
+</html>
