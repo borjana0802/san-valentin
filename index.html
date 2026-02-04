@@ -13,9 +13,9 @@
             height: 100vh;
             margin: 0;
             font-family: 'Arial', sans-serif;
-            /* Se ha cambiado el color de fondo aquí debajo */
-            background-color: #dfa7e4; 
+            background-color: #dfa7e4; /* Tu nuevo color */
             text-align: center;
+            overflow: hidden; /* Para que los corazones no creen scroll */
         }
 
         .container {
@@ -25,6 +25,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 450px; 
             width: 90%;
+            z-index: 10; /* Para que esté por encima de los corazones */
+            position: relative;
         }
 
         h1 { color: #d63384; font-size: 1.6rem; line-height: 1.4; }
@@ -59,6 +61,24 @@
             border-radius: 10px;
         }
 
+        /* Estilo para los corazones que caen */
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 24px;
+            color: #ff4d6d;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1; 
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
         #musica-container {
             position: absolute;
             width: 0;
@@ -85,6 +105,7 @@
     </div>
 
     <script>
+        // API de Youtube
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -120,6 +141,33 @@
             "si le vuelve a da a que no yo ma para siempre..."
         ];
 
+        // Función para crear corazones
+        function crearCorazon() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💞'; // 
+            
+            // Posición aleatoria en el ancho de la pantalla
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamaño aleatorio para variedad
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            
+            // Velocidad de caída aleatoria (entre 2 y 5 segundos)
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.body.appendChild(heart);
+
+            // Eliminar el corazón del DOM después de que caiga para no saturar la memoria
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function iniciarLluviaCorazones() {
+            setInterval(crearCorazon, 200); // Crea un corazón cada 200ms
+        }
+
         function iniciarMusica() {
             if (player && player.playVideo) {
                 player.playVideo();
@@ -140,10 +188,15 @@
         btnSi.addEventListener('click', () => {
             iniciarMusica();
             titulo.innerHTML = " 💞BIEEEEEEEN TE AMO MI NIÑAAAAAAAA Y YO MA ALIOOOOOOOOOOOOO 💞 ";
-            imagen.src = "https://media.tenor.com/A6S9YcclI8AAAAAj/mochi-mochi-peach-cat-peach-cat.gif";
+            
+            // Aquí hemos quitado la línea que cambiaba la imagen.
+            // Se queda la de Cinnamoroll original.
             
             btnNo.style.display = 'none';
             btnSi.style.display = 'none';
+            
+            // Iniciamos la lluvia de corazones
+            iniciarLluviaCorazones();
         });
     </script>
 </body>
